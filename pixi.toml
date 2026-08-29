@@ -1,0 +1,47 @@
+[workspace]
+name = "roaring"
+version = "0.1.0"
+authors = ["Marius S <39998+winding-lines@users.noreply.github.com>"]
+description = "Pure-Mojo Roaring bitmaps (32-bit and 64-bit) with portable serialization and Apache Iceberg deletion-vector framing."
+preview = ["pixi-build"]
+channels = [
+    "https://conda.modular.com/max-nightly",
+    "conda-forge",
+]
+platforms = ["osx-arm64", "linux-64", "linux-aarch64"]
+
+[tasks]
+# Pure Mojo, no FFI — consumers just `-I ../roaring.mojo/src`.
+test = { cmd = "mkdir -p build && mojo build tests/roaring_test.mojo -I src -o build/roaring-test && ./build/roaring-test" }
+bench = { cmd = "mkdir -p build && mojo build tests/bench.mojo -I src -o build/roaring-bench && ./build/roaring-bench" }
+
+[feature.nightly.dependencies]
+modular = ">=26.6.0.dev2026082605,<27"
+
+[feature.stable.dependencies]
+mojo-compiler = "==1.0.0"
+
+[environments]
+default = ["nightly"]
+stable = ["stable"]
+
+# ── pixi-build: consumable as a pixi source dependency ──────────────────────
+[package]
+name = "roaring-mojo"
+version = "0.1.0"
+
+[package.build]
+backend = { name = "pixi-build-mojo", version = "0.*" }
+
+[package.build.config.pkg]
+path = "src/roaring"
+name = "roaring"
+
+[package.host-dependencies]
+mojo-compiler = "==1.0.0"
+
+[package.build-dependencies]
+mojo-compiler = "==1.0.0"
+
+[package.run-dependencies]
+mojo-compiler = "==1.0.0"
