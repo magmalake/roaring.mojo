@@ -1,4 +1,4 @@
-name = "roaring"
+name = "roaring-mojo"
 version = "0.1.0"
 description = "Pure-Mojo Roaring bitmaps (32-bit and 64-bit) with portable serialization and Apache Iceberg deletion-vector framing"
 tags = ["roaring", "bitmap", "iceberg", "data-lake", "serialization"]
