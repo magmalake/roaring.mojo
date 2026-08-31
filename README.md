@@ -2,7 +2,7 @@
 
 [![mojoshelf](https://mojoshelf.org/badge/roaring-mojo.svg)](https://mojoshelf.org/tins/roaring-mojo) [![mojo nightly](https://mojoshelf.org/badge/roaring-mojo/nightly.svg)](https://mojoshelf.org/tins/roaring-mojo)
 
-> Part of **magmalake** — data lake building blocks in Mojo.
+> Part of [**magmalake**](https://magmalake.org) — data lake building blocks in Mojo.
 
 Pure-Mojo **Roaring bitmaps** — 32-bit and 64-bit — implementing the
 [RoaringFormatSpec](https://github.com/RoaringBitmap/RoaringFormatSpec)
