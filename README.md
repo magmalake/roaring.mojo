@@ -159,24 +159,36 @@ this library never run-encodes implicitly.)
 ## Bench
 
 ```sh
-pixi run bench
+pixi run -e bench bench                 # the table below
+pixi run -e bench bench -- --json       # every repetition, for tracking
+pixi run -e bench bench -- --only bench_add
 ```
 
 Adding 10,000,000 random `UInt32` values (all 65536 possible containers get
-touched; most stay array containers at ~150 elements each), then
-serializing and deserializing the result, on an Apple Silicon Mac:
+touched; most stay array containers at ~150 elements each), then serializing
+and deserializing the result, on an Apple Silicon Mac. Measured with
+[bench.mojo](https://github.com/magmalake/bench.mojo) — mean of three timed
+repetitions:
 
-| operation | time |
-|---|---|
-| add 10M values | ~5-11s (`Dict`-keyed container lookup per add; see note below) |
-| serialize (~20.5 MB output) | ~50-130ms |
-| deserialize | ~110-230ms |
+| operation | time | rate |
+|---|---|---|
+| add 10M values | 1.30 s | 7.7 Melem/s |
+| serialize (~20.5 MB output) | 24.0 ms | 0.854 GB/s |
+| deserialize | 66.8 ms | 0.307 GB/s |
 
-The add times vary noticeably run to run — the container lookup is a
-`Dict[UInt16, Container]` subscript per value, which is amortized O(1) but
-carries real per-call overhead at 10M calls; serialize/deserialize walk a
-`Dict` of at most 65536 containers doing bulk byte work per container,
-which is far cheaper per element.
+**These are much faster than the figures published before 2026-09-01
+(~5–11 s / ~50–130 ms / ~110–230 ms), and the add row is a measurement fix
+rather than a speedup.** The old bench generated each random value *inside*
+the timed loop, so roughly three quarters of that 5–11 s was `random_ui64`,
+not `add`. Values are now generated during setup, which the harness does not
+time. The serialize and deserialize rows were single cold passes and are
+simply steadier now.
+
+The container lookup is still a `Dict[UInt16, Container]` subscript per
+value — amortized O(1), but with real per-call overhead at 10M calls, and it
+is what the 1.30 s is mostly made of. Serialize and deserialize walk a `Dict`
+of at most 65536 containers doing bulk byte work per container, which is far
+cheaper per element.
 
 ## Layout
 
@@ -191,7 +203,8 @@ src/roaring/
   crc32.mojo        standalone CRC-32 (gzip/zlib variant)
 tests/
   roaring_test.mojo unit tests + pyroaring cross-checks
-  bench.mojo        10M-value add/serialize/deserialize bench
+bench/
+  bench_roaring.mojo 10M-value add/serialize/deserialize bench
 ```
 
 Consume it like the other magmalake Mojo libs — `-I ../roaring.mojo/src`
