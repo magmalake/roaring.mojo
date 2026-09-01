@@ -11,6 +11,14 @@ Iceberg's deletion-vector v1 blob framing. No dependencies: the CRC-32 used
 by the Iceberg framing is a from-scratch implementation, not a wrapper
 around a system zlib or another Mojo package.
 
+## Install
+
+```sh
+pixi shelf add roaring-mojo
+```
+
+That resolves the tin from [mojoshelf](https://mojoshelf.org) and adds it — along with the tins it depends on — as **pixi git source dependencies**. magmalake tins are not published to a conda channel, so `pixi add roaring-mojo` will not find them.
+
 ## Why this exists
 
 Apache Iceberg v3 [deletion
