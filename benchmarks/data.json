@@ -1,0 +1,75 @@
+{
+  "hosts": {
+    "linux-x86_64-amd-epyc-9v74-80-core-processor-2c": {
+      "cpu": "AMD EPYC 9V74 80-Core Processor",
+      "os": "linux",
+      "arch": "x86_64",
+      "physical_cores": 2,
+      "logical_cores": 4,
+      "performance_cores": 2,
+      "memory_bytes": 16766414848,
+      "accelerator": false
+    }
+  },
+  "runs": [
+    {
+      "commit": "d36f33b91376e34d8f46325faf82f2448633d5be",
+      "short_commit": "d36f33b",
+      "timestamp": "2026-09-01T20:26:49Z",
+      "ref": "main",
+      "host": "linux-x86_64-amd-epyc-9v74-80-core-processor-2c",
+      "config": {
+        "min_runtime_secs": 1.0,
+        "num_warmup_iters": 2,
+        "num_repetitions": 3,
+        "max_iters": 100000000
+      },
+      "results": {
+        "bench_add": {
+          "mean_ns": 2850192278.3333335,
+          "min_ns": 2822515164.0,
+          "max_ns": 2902959574.0,
+          "median_ns": 2825102097.0,
+          "stddev_ns": 45716120.51089513,
+          "iters": 1,
+          "reps": 3,
+          "throughput": 0.003508535222699978,
+          "throughput_unit": "GElems/s",
+          "throughput_metric": "elements",
+          "throughput_count": 10000000
+        },
+        "bench_serialize_portable": {
+          "mean_ns": 49031547.12698413,
+          "min_ns": 48459024.47619048,
+          "max_ns": 49571999.428571425,
+          "median_ns": 49063617.47619048,
+          "stddev_ns": 557180.1249421107,
+          "iters": 21,
+          "reps": 3,
+          "throughput": 0.41811419792457566,
+          "throughput_unit": "GB/s",
+          "throughput_metric": "bytes",
+          "throughput_count": 20500786
+        },
+        "bench_deserialize_portable": {
+          "mean_ns": 117904913.03703703,
+          "min_ns": 117127181.0,
+          "max_ns": 118972041.44444445,
+          "median_ns": 117615516.66666667,
+          "stddev_ns": 955871.4397117422,
+          "iters": 9,
+          "reps": 3,
+          "throughput": 0.17387558730110056,
+          "throughput_unit": "GB/s",
+          "throughput_metric": "bytes",
+          "throughput_count": 20500786
+        }
+      }
+    }
+  ],
+  "benchmarks": [
+    "bench_add",
+    "bench_deserialize_portable",
+    "bench_serialize_portable"
+  ]
+}

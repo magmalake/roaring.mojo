@@ -1,0 +1,83 @@
+{
+  "host": {
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "os": "linux",
+    "arch": "x86_64",
+    "physical_cores": 2,
+    "logical_cores": 4,
+    "performance_cores": 2,
+    "memory_bytes": 16766414848,
+    "accelerator": false
+  },
+  "config": {
+    "min_runtime_secs": 1.0,
+    "num_warmup_iters": 2,
+    "num_repetitions": 3,
+    "max_iters": 100000000
+  },
+  "results": [
+    {
+      "name": "bench_add",
+      "unit": "ns",
+      "iters": 1,
+      "reps": 3,
+      "mean_ns": 2850192278.3333335,
+      "min_ns": 2822515164.0,
+      "max_ns": 2902959574.0,
+      "median_ns": 2825102097.0,
+      "stddev_ns": 45716120.51089513,
+      "runs_ns": [
+        2822515164.0,
+        2902959574.0,
+        2825102097.0
+      ],
+      "throughput_metric": "elements",
+      "throughput_unit": "GElems/s",
+      "throughput_count": 10000000,
+      "throughput": 0.003508535222699978
+    },
+    {
+      "name": "bench_serialize_portable",
+      "unit": "ns",
+      "iters": 21,
+      "reps": 3,
+      "mean_ns": 49031547.12698413,
+      "min_ns": 48459024.47619048,
+      "max_ns": 49571999.428571425,
+      "median_ns": 49063617.47619048,
+      "stddev_ns": 557180.1249421107,
+      "runs_ns": [
+        49571999.428571425,
+        48459024.47619048,
+        49063617.47619048
+      ],
+      "throughput_metric": "bytes",
+      "throughput_unit": "GB/s",
+      "throughput_count": 20500786,
+      "throughput": 0.41811419792457566
+    },
+    {
+      "name": "bench_deserialize_portable",
+      "unit": "ns",
+      "iters": 9,
+      "reps": 3,
+      "mean_ns": 117904913.03703703,
+      "min_ns": 117127181.0,
+      "max_ns": 118972041.44444445,
+      "median_ns": 117615516.66666667,
+      "stddev_ns": 955871.4397117422,
+      "runs_ns": [
+        118972041.44444445,
+        117615516.66666667,
+        117127181.0
+      ],
+      "throughput_metric": "bytes",
+      "throughput_unit": "GB/s",
+      "throughput_count": 20500786,
+      "throughput": 0.17387558730110056
+    }
+  ],
+  "commit": "d36f33b91376e34d8f46325faf82f2448633d5be",
+  "ref": "main",
+  "timestamp": "2026-09-01T20:26:49Z"
+}
