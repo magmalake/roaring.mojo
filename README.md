@@ -17,6 +17,8 @@ around a system zlib or another Mojo package.
 pixi shelf add roaring-mojo
 ```
 
+Working with a coding agent? `npx skills add mojoshelf/mojoshelf --skill mojoshelf-consume --yes` teaches it to find and install tins itself — it installs the `shelf` CLI too.
+
 That resolves the tin from [mojoshelf](https://mojoshelf.org) and adds it — along with the tins it depends on — as **pixi git source dependencies**. magmalake tins are not published to a conda channel, so `pixi add roaring-mojo` will not find them.
 
 ## Why this exists
