@@ -176,6 +176,13 @@ repetitions:
 | serialize (~20.5 MB output) | 24.0 ms | 0.854 GB/s |
 | deserialize | 66.8 ms | 0.307 GB/s |
 
+Every push to `main` re-runs these on a GitHub runner and appends to a history
+published at
+[magmalake.github.io/roaring.mojo/benchmarks](https://magmalake.github.io/roaring.mojo/benchmarks/).
+Those numbers are slower and noisier than the table above, which was taken on
+an M4 — each history is keyed by machine, so the two stay separate series and
+are never averaged together.
+
 **These are much faster than the figures published before 2026-09-01
 (~5–11 s / ~50–130 ms / ~110–230 ms), and the add row is a measurement fix
 rather than a speedup.** The old bench generated each random value *inside*
