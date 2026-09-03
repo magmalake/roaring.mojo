@@ -13,6 +13,9 @@ platforms = ["osx-arm64", "linux-64", "linux-aarch64"]
 [tasks]
 # Pure Mojo, no FFI — consumers just `-I ../roaring.mojo/src`.
 test = { cmd = "mkdir -p build && mojo build tests/roaring_test.mojo -I src -o build/roaring-test && ./build/roaring-test" }
+# mojolint (lint-mojo, below): the origin and threading mistakes the compiler
+# lets through, with mojo-lsp-server behind the rules. Exit 1 on findings.
+lint = { cmd = "mojolint --lsp -I src src tests" }
 
 [feature.nightly.dependencies]
 modular = ">=26.6.0.dev2026082605,<27"
@@ -56,3 +59,9 @@ mojo-compiler = "==1.0.0"
 
 [package.run-dependencies]
 mojo-compiler = ">=1.0.0,<2"
+
+[dependencies]
+# Added by `pixi shelf add lint-mojo`: the linter comes from GitHub as a pixi
+# source dependency pinned at the revision mojoshelf published, and builds
+# the `mojolint` executable into every environment next to mojo-lsp-server.
+lint-mojo = { git = "https://github.com/magmalake/lint.mojo.git", rev = "2a12807b7847984aff2c8bf148b0eb7515a99844" }
