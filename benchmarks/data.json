@@ -17,7 +17,7 @@
       "physical_cores": 2,
       "logical_cores": 4,
       "performance_cores": 2,
-      "memory_bytes": 16765378560,
+      "memory_bytes": 16765374464,
       "accelerator": false
     },
     "linux-x86_64-intel-r-xeon-r-6973p-c-2c": {
@@ -42,6 +42,60 @@
     }
   },
   "runs": [
+    {
+      "commit": "3bc237cd6bd1a6dd87bf34aa27b1cb9780f7026f",
+      "short_commit": "3bc237c",
+      "timestamp": "2026-09-04T02:19:35Z",
+      "ref": "main",
+      "host": "linux-x86_64-intel-r-xeon-r-platinum-8573c-2c",
+      "config": {
+        "min_runtime_secs": 1.0,
+        "num_warmup_iters": 2,
+        "num_repetitions": 3,
+        "max_iters": 100000000
+      },
+      "results": {
+        "bench_add": {
+          "mean_ns": 2449636699.0,
+          "min_ns": 2431565672.0,
+          "max_ns": 2483742937.0,
+          "median_ns": 2433601488.0,
+          "stddev_ns": 29554403.048969656,
+          "iters": 1,
+          "reps": 3,
+          "throughput": 0.0040822379923040174,
+          "throughput_unit": "GElems/s",
+          "throughput_metric": "elements",
+          "throughput_count": 10000000
+        },
+        "bench_serialize_portable": {
+          "mean_ns": 39530775.68965518,
+          "min_ns": 39188846.10344828,
+          "max_ns": 39835655.862068966,
+          "median_ns": 39567825.10344828,
+          "stddev_ns": 324992.6310834559,
+          "iters": 29,
+          "reps": 3,
+          "throughput": 0.5186031804927334,
+          "throughput_unit": "GB/s",
+          "throughput_metric": "bytes",
+          "throughput_count": 20500786
+        },
+        "bench_deserialize_portable": {
+          "mean_ns": 97003229.06060606,
+          "min_ns": 95131383.0,
+          "max_ns": 99868332.36363636,
+          "median_ns": 96009971.81818181,
+          "stddev_ns": 2519839.7331248843,
+          "iters": 11,
+          "reps": 3,
+          "throughput": 0.21134127387853693,
+          "throughput_unit": "GB/s",
+          "throughput_metric": "bytes",
+          "throughput_count": 20500786
+        }
+      }
+    },
     {
       "commit": "3e33700585b8731a8fb3fe14e746aba44658fa91",
       "short_commit": "3e33700",
