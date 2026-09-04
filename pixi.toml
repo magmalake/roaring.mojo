@@ -1,6 +1,6 @@
 [workspace]
 name = "roaring"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Marius S <39998+winding-lines@users.noreply.github.com>"]
 description = "Pure-Mojo Roaring bitmaps (32-bit and 64-bit) with portable serialization and Apache Iceberg deletion-vector framing."
 preview = ["pixi-build"]
@@ -42,7 +42,7 @@ bench = ["stable", "bench"]
 # ── pixi-build: consumable as a pixi source dependency ──────────────────────
 [package]
 name = "roaring-mojo"
-version = "0.1.0"
+version = "0.1.1"
 
 [package.build]
 backend = { name = "pixi-build-mojo", version = "0.*" }

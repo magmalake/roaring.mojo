@@ -1,5 +1,5 @@
 """A single Roaring container, keyed externally by a 16-bit high key and
-holding up to 65536 low-16-bit values in one of three representations:
+holding up to 65536 low-16-bit values in one of three representations.
 
   - **array**: a sorted `List[UInt16]`, used while cardinality <= 4096.
   - **bitset**: a fixed 1024-word (65536-bit) bitset, used above that.

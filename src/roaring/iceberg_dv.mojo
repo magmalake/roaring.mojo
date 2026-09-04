@@ -1,5 +1,5 @@
 """Apache Iceberg "deletion vector v1" blob framing
-(https://iceberg.apache.org/puffin-spec/#deletion-vector-v1-blob-type):
+(https://iceberg.apache.org/puffin-spec/#deletion-vector-v1-blob-type).
 
     4 bytes            length of (magic + vector), big-endian
     4 bytes            magic: D1 D3 39 64

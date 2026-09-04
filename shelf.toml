@@ -1,5 +1,5 @@
 name = "roaring-mojo"
-version = "0.1.0"
+version = "0.1.1"
 description = "Pure-Mojo Roaring bitmaps (32-bit and 64-bit) with portable serialization and Apache Iceberg deletion-vector framing"
 tags = ["roaring", "bitmap", "iceberg", "data-lake", "serialization"]
 # other tins this one depends on; omit if none
