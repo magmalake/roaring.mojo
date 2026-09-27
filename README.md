@@ -137,7 +137,7 @@ specifies, not an inconsistency in this implementation. Row positions are
 pixi run test
 ```
 
-26 tests covering: array/bitset/run container behavior and the 4096-element
+The tests cover array/bitset/run container behavior and the 4096-element
 promotion boundary in both directions, `add_range`, multi-container
 ordering, all four binary set operations (including across mixed
 array/bitset representations), `run_optimize` (both the shrink case and the
