@@ -41,14 +41,13 @@ def bench_add(mut b: Benchmark) raises:
     var vals = _values(N)
     b.throughput(Metric.elements(), N)
 
-    @parameter
-    def call() raises:
+    def call() raises {imm vals}:
         var bm = Bitmap32()
         for i in range(len(vals)):
             bm.add(vals[i])
         keep(bm.cardinality())
 
-    b.iter[call]()
+    b.iter(call)
     keep(vals)
 
 
@@ -56,12 +55,11 @@ def bench_serialize_portable(mut b: Benchmark) raises:
     var bm = _filled(N)
     b.throughput(Metric.bytes(), len(bm.serialize_portable()))
 
-    @parameter
-    def call() raises:
+    def call() raises {imm bm}:
         var data = bm.serialize_portable()
         keep(data)
 
-    b.iter[call]()
+    b.iter(call)
     keep(bm.cardinality())
 
 
@@ -70,12 +68,11 @@ def bench_deserialize_portable(mut b: Benchmark) raises:
     var data = bm.serialize_portable()
     b.throughput(Metric.bytes(), len(data))
 
-    @parameter
-    def call() raises:
+    def call() raises {imm data}:
         var back = Bitmap32.deserialize_portable(Span(data))
         keep(back.cardinality())
 
-    b.iter[call]()
+    b.iter(call)
     keep(data)
 
 
