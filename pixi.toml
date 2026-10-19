@@ -18,7 +18,7 @@ test = { cmd = "mkdir -p build && mojo build tests/roaring_test.mojo -I src -o b
 lint = { cmd = "mojolint --lsp -I src src tests" }
 
 [feature.nightly.dependencies]
-modular = ">=26.7.0.dev2026092005,<28"
+modular = ">=26.7.0.dev2026101905,<28"
 
 [feature.stable.dependencies]
 mojo-compiler = "==1.1.0"
