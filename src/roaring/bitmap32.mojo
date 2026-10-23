@@ -163,19 +163,20 @@ struct Bitmap32(Copyable, Movable):
         var n: Int
         var has_run = False
         var run_flags = List[Bool]()
-        if low16 == SERIAL_COOKIE_NO_RUNCONTAINER:
-            n = Int(read_u32_le(data, p))
-            p += 4
-        elif low16 == SERIAL_COOKIE:
-            has_run = True
-            n = Int(cookie32 >> 16) + 1
-            var nbytes = (n + 7) // 8
-            for i in range(n):
-                var byte = data[p + i // 8]
-                run_flags.append(((byte >> UInt8(i % 8)) & 1) != 0)
-            p += nbytes
-        else:
-            raise Error("roaring: bad portable cookie")
+        match low16:
+            case == SERIAL_COOKIE_NO_RUNCONTAINER:
+                n = Int(read_u32_le(data, p))
+                p += 4
+            case == SERIAL_COOKIE:
+                has_run = True
+                n = Int(cookie32 >> 16) + 1
+                var nbytes = (n + 7) // 8
+                for i in range(n):
+                    var byte = data[p + i // 8]
+                    run_flags.append(((byte >> UInt8(i % 8)) & 1) != 0)
+                p += nbytes
+            case _:
+                raise Error("roaring: bad portable cookie")
 
         var keys = List[UInt16]()
         var cards = List[Int]()
@@ -266,35 +267,36 @@ def _binop(a: Bitmap32, b: Bitmap32, op: Int) raises -> Bitmap32:
         var has_b = k in b.containers
         var merged = Container()
         var keep = False
-        if op == 0:  # or
-            if has_a and has_b:
-                merged = Container.or_(a.containers[k], b.containers[k])
-            elif has_a:
-                merged = a.containers[k].copy()
-            else:
-                merged = b.containers[k].copy()
-            keep = True
-        elif op == 1:  # and
-            if has_a and has_b:
-                merged = Container.and_(a.containers[k], b.containers[k])
+        match op:
+            case 0:  # or
+                if has_a and has_b:
+                    merged = Container.or_(a.containers[k], b.containers[k])
+                elif has_a:
+                    merged = a.containers[k].copy()
+                else:
+                    merged = b.containers[k].copy()
                 keep = True
-        elif op == 2:  # and_not
-            if has_a and has_b:
-                merged = Container.and_not(a.containers[k], b.containers[k])
-                keep = True
-            elif has_a:
-                merged = a.containers[k].copy()
-                keep = True
-        else:  # xor
-            if has_a and has_b:
-                merged = Container.xor(a.containers[k], b.containers[k])
-                keep = True
-            elif has_a:
-                merged = a.containers[k].copy()
-                keep = True
-            else:
-                merged = b.containers[k].copy()
-                keep = True
+            case 1:  # and
+                if has_a and has_b:
+                    merged = Container.and_(a.containers[k], b.containers[k])
+                    keep = True
+            case 2:  # and_not
+                if has_a and has_b:
+                    merged = Container.and_not(a.containers[k], b.containers[k])
+                    keep = True
+                elif has_a:
+                    merged = a.containers[k].copy()
+                    keep = True
+            case _:  # xor
+                if has_a and has_b:
+                    merged = Container.xor(a.containers[k], b.containers[k])
+                    keep = True
+                elif has_a:
+                    merged = a.containers[k].copy()
+                    keep = True
+                else:
+                    merged = b.containers[k].copy()
+                    keep = True
         if keep and merged.cardinality() > 0:
             result.containers[k] = merged^
 
