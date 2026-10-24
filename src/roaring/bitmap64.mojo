@@ -164,35 +164,36 @@ def _binop64(a: Bitmap64, b: Bitmap64, op: Int) raises -> Bitmap64:
         var has_b = k in b.maps
         var merged = Bitmap32()
         var keep = False
-        if op == 0:  # or
-            if has_a and has_b:
-                merged = Bitmap32.or_(a.maps[k], b.maps[k])
-            elif has_a:
-                merged = a.maps[k].copy()
-            else:
-                merged = b.maps[k].copy()
-            keep = True
-        elif op == 1:  # and
-            if has_a and has_b:
-                merged = Bitmap32.and_(a.maps[k], b.maps[k])
+        match op:
+            case 0:  # or
+                if has_a and has_b:
+                    merged = Bitmap32.or_(a.maps[k], b.maps[k])
+                elif has_a:
+                    merged = a.maps[k].copy()
+                else:
+                    merged = b.maps[k].copy()
                 keep = True
-        elif op == 2:  # and_not
-            if has_a and has_b:
-                merged = Bitmap32.and_not(a.maps[k], b.maps[k])
-                keep = True
-            elif has_a:
-                merged = a.maps[k].copy()
-                keep = True
-        else:  # xor
-            if has_a and has_b:
-                merged = Bitmap32.xor(a.maps[k], b.maps[k])
-                keep = True
-            elif has_a:
-                merged = a.maps[k].copy()
-                keep = True
-            else:
-                merged = b.maps[k].copy()
-                keep = True
+            case 1:  # and
+                if has_a and has_b:
+                    merged = Bitmap32.and_(a.maps[k], b.maps[k])
+                    keep = True
+            case 2:  # and_not
+                if has_a and has_b:
+                    merged = Bitmap32.and_not(a.maps[k], b.maps[k])
+                    keep = True
+                elif has_a:
+                    merged = a.maps[k].copy()
+                    keep = True
+            case _:  # xor
+                if has_a and has_b:
+                    merged = Bitmap32.xor(a.maps[k], b.maps[k])
+                    keep = True
+                elif has_a:
+                    merged = a.maps[k].copy()
+                    keep = True
+                else:
+                    merged = b.maps[k].copy()
+                    keep = True
         if keep:
             var card = merged.cardinality()
             if card > 0:
