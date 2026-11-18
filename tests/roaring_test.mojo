@@ -18,7 +18,7 @@ cookie. Mojo's `Bitmap32` never auto-optimizes; the matching test calls
 from std.testing import TestSuite, assert_equal, assert_false, assert_raises, assert_true
 
 from roaring import Bitmap32, Bitmap64, decode_iceberg_dv, encode_iceberg_dv
-from roaring.container import CONTAINER_ARRAY, CONTAINER_BITSET, CONTAINER_RUN, Container
+from roaring.container import CONTAINER_ARRAY, CONTAINER_BITSET, CONTAINER_RUN
 
 # ── pyroaring cross-check payloads ──────────────────────────────────────
 
