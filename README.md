@@ -1,6 +1,6 @@
 # roaring.mojo
 
-[![mojoshelf](https://mojoshelf.org/badge/roaring-mojo.svg)](https://mojoshelf.org/tins/roaring-mojo) [![mojo nightly](https://mojoshelf.org/badge/roaring-mojo/nightly.svg)](https://mojoshelf.org/tins/roaring-mojo)
+[![mojoshelf](https://mojoshelf.org/badge/roaring-mojo.svg)](https://mojoshelf.org/tins/roaring-mojo) [![mojo nightly](https://mojoshelf.org/badge/roaring-mojo/nightly.svg)](https://mojoshelf.org/tins/roaring-mojo) [![Used by](https://mojourney.dev/badge/magmalake/roaring.mojo/used-by.svg)](https://mojourney.dev/repos/magmalake/roaring.mojo#used-by) [![Mojo version](https://mojourney.dev/badge/magmalake/roaring.mojo/mojo.svg)](https://mojourney.dev/repos/magmalake/roaring.mojo)
 
 > Part of [**magmalake**](https://magmalake.org) — data lake building blocks in Mojo.
 
