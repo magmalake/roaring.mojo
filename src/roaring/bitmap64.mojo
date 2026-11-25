@@ -45,7 +45,12 @@ struct Bitmap64(Copyable, Movable):
                 _ = self.maps.pop(key)
 
     def run_optimize(mut self) raises:
+        # The keys by value: one borrowed from the dict can't index it for
+        # a mutation.
+        var keys = List[UInt32]()
         for k in self.maps.keys():
+            keys.append(k)
+        for k in keys:
             self.maps[k].run_optimize()
 
     # ── queries ──────────────────────────────────────────────────────────
